@@ -1,0 +1,13 @@
+1. String functions
+2. Array Functions
+3. Header status codes
+4. Modal pop up
+5. json_encode()
+6. display:block css
+7. Header Response Status codes
+
+Informational responses (100–199),
+Successful responses (200–299),
+Redirects (300–399),
+Client errors (400–499),
+and Server errors (500–599).
