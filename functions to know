@@ -1,0 +1,16 @@
+ filemtime(__FILE__) // file_last_mod_time
+header("Last-Modified: ".gmdate("D, d M Y H:i:s", $last_modified_time)." GMT");
+header('Cache-Control: max-age=86400');
+header('ETag: ' . $etag);
+$_SERVER['HTTP_IF_NONE_MATCH']
+
+header status codes
+
+Ans :
+
+Informational responses (100–199),
+Successful responses (200–299),
+Redirects (300–399),
+Client errors (400–499),
+and Server errors (500–599).
+ 
