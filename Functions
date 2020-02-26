@@ -11,3 +11,6 @@ Successful responses (200–299),
 Redirects (300–399),
 Client errors (400–499),
 and Server errors (500–599).
+
+8. HTTP Methods
+GET, POST, PUT, HEAD, DELETE, PATCH, OPTIONS
