@@ -14,3 +14,6 @@ and Server errors (500–599).
 
 8. HTTP Methods
 GET, POST, PUT, HEAD, DELETE, PATCH, OPTIONS
+
+9. All HTML documents must start with a document type declaration: <!DOCTYPE html>.
+
