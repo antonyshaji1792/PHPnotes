@@ -23,3 +23,7 @@ The function names __construct(), __destruct(), __call(), __callStatic(), __get(
 
 Remove all HTML tags from a string:
 filter_var($str, FILTER_SANITIZE_STRING);
+
+
+FILTER_FLAG_STRIP_LOW - Remove characters with ASCII value < 32
+filter_var( $string , FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
