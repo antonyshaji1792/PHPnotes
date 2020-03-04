@@ -20,3 +20,6 @@ GET, POST, PUT, HEAD, DELETE, PATCH, OPTIONS
 10. Magic Methods in PHP
 Ans:
 The function names __construct(), __destruct(), __call(), __callStatic(), __get(), __set(), __isset(), __unset(), __sleep(), __wakeup(), __toString(), __invoke(), __set_state(), __clone() and __debugInfo() are magical in PHP classes.
+
+Remove all HTML tags from a string:
+filter_var($str, FILTER_SANITIZE_STRING);
