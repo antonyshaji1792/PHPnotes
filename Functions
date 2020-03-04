@@ -24,6 +24,21 @@ The function names __construct(), __destruct(), __call(), __callStatic(), __get(
 Remove all HTML tags from a string:
 filter_var($str, FILTER_SANITIZE_STRING);
 
+FILTER_SANITIZE_EMAIL
+FILTER_SANITIZE_URL
+
+===============
+The FILTER_SANITIZE_NUMBER_INT filter removes all illegal characters from a number.
+This filter allows digits and . + -
+FILTER_SANITIZE_NUMBER_INT
+===============
 
 FILTER_FLAG_STRIP_LOW - Remove characters with ASCII value < 32
 filter_var( $string , FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+
+======================
+
+The FILTER_SANITIZE_URL filter removes all illegal URL characters from a string.
+This filter allows all letters, digits and $-_.+!*'(),{}|\\^~[]`"><#%;/?:@&=
+
+======================
