@@ -1,0 +1,4 @@
+//shows all php erros
+error_reporting(-1);
+//ini_set changes the settings in .ini file
+ini_set('display_errors', 'On');
