@@ -1,0 +1,6 @@
+Static Methods
+Static methods can be called directly without needing an instance of the class (an object). And, $this pseudo-variable is not available inside static methods.
+
+Static methods and properties can be considered as escaping from Object-Oriented Programming.
+
+=====================
