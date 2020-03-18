@@ -1,6 +1,29 @@
+Inheritance
+Construtor
+Ddestrutor
+
+
+Inheritance - include the class file name and use extends to use the included file methods
+
+Class A extends B{}
+
+=========================
+Construtor
+Function called every time the object of the class in initiated.
+
+public function __construct(){}
+
+
+==============================
+Destrutor
+Function called every time at the end of every time when an object of a class is initiated.
+
+public function __destruct(){}
+
+============================
 Static Methods
 Static methods can be called directly without needing an instance of the class (an object). And, $this pseudo-variable is not available inside static methods.
 
-Static methods and properties can be considered as escaping from Object-Oriented Programming.
+Static methods and properties can be considered as escaping from Object-Oriented Programming.r
 
 =====================
