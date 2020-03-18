@@ -57,3 +57,9 @@ interface Name{
 }
 The class that will have this interface should use the above declared function.
 
+To use it
+1. First include the file
+2. Then Class A implements interfacename{} 
+3. we can implement more than one interface for a class
+   Then Class A implements interfacename,interfacename2{} 
+
