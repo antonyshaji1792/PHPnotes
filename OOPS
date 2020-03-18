@@ -1,6 +1,7 @@
 Inheritance
 Construtor
-Ddestrutor
+Destrutor
+Access Modifiers - Public, Private
 
 
 Inheritance - include the class file name and use extends to use the included file methods
@@ -27,3 +28,15 @@ Static methods can be called directly without needing an instance of the class (
 Static methods and properties can be considered as escaping from Object-Oriented Programming.r
 
 =====================
+
+Access Modifiers
+
+Public
+
+Private - Private property or Function cannot be accessed outside the class
+
+
+
+
+
+
