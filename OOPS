@@ -50,4 +50,10 @@ Interface
 
 1. Rules for creating methods in objects. So that developer will not create different do function names to same functionalities
 
+created by 
+
+interface Name{
+  public function funcName();
+}
+The class that will have this interface should use the above declared function.
 
