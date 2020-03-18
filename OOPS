@@ -57,6 +57,12 @@ interface Name{
 }
 The class that will have this interface should use the above declared function.
 
+interface Name{
+  public function funcName($value1, $value2);
+}
+
+The class that will have this interface should use the above declared function and must have two values.
+
 To use it
 1. First include the file
 2. Then Class A implements interfacename{} 
