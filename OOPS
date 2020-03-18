@@ -34,8 +34,7 @@ Access Modifiers
 Public
 
 Private - 
-1) Private property cannot be accessed outside the class directly or echo from the class 
-2) Private property can be accessed by having it inside a public function and echo
+1) Private property no direct echo of the property. To echo it has to pass through a public function.
 
 
 
