@@ -1,7 +1,7 @@
 Inheritance
 Construtor
 Destrutor
-Access Modifiers - Public, Private
+Access Modifiers - Public, Private, Protected
 
 
 Inheritance - include the class file name and use extends to use the included file methods
@@ -33,11 +33,15 @@ Access Modifiers
 
 Public
 
+Can be accessible anywhere
+
 Private - 
 1) Private property no direct echo of the property. To echo it has to pass through a public function.
+2) Private property cannot be used in the extended class also. Only accessible inside the declared class
 
+Protected -
 
-
+Cannot be accessed even by own Object directly, but can be used by own or extended class methods
 
 
 
