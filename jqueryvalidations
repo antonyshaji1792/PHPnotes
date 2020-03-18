@@ -1,0 +1,351 @@
+$(document).ready(function() {
+	
+$( "#signinpay" ).click(function() {
+		//to check if checkbox is checked
+		var agreecondition=$('#agree').is(':checked'); 
+
+if(agreecondition==true)
+{
+    //get value from local storage
+    var sessionuser= localStorage.getItem('sessionusername');
+  	//var sessionuser= "<?php //echo $_SESSION["UserName"];?>";		
+  	if(sessionuser==null)
+		{
+    //open model
+			$("#loginregister").modal();
+		}
+		else{
+          
+            //Radio button is checked
+	        	var cardtype=	$('input[name="cardtype"]:checked').val();
+
+			if(cardtype=="credit_card")
+			{			
+				$("#cc_modal").modal();
+			}
+			else
+			{
+				//$('#Submit2').click();			
+			}
+
+
+		}
+
+}
+else{
+if($("#myAlert").find("div#myAlert2").length==0){
+		$("#myAlert").append("<div class='alert alert-warning alert-dismissable alert-style' id='myAlert2'><button type='button' class='close' data-dismiss='alert'  aria-hidden='true'>&times;</button><i class='fa fa-times-circle' style='color:#ea5d47; font-size:30px; position: absolute; left:20px;' aria-hidden='true'></i>  You have to agree with our <a href='/user-agreement.php' target='_blank'> Terms & Conditions</a>  in order to proceed.</div>");
+  }
+  $("#myAlert").css("display", "");
+
+	$("#myAlert").delay(10000).slideUp(200, function() {
+    $(this).alert('close');
+ });
+    
+}
+
+		
+  });
+	$( "#login_temp" ).click(function() { 
+		$("#email_temp2,#pwd_temp2,#uname_temp2").val("");
+		var email=$("#email_temp1").val();
+		var password=$("#pwd_temp1").val();
+		if(email=="")
+		{
+			$('#login-formerror').fadeIn().html("Please enter your username / email address.");
+			setTimeout(function() {	$('#login-formerror').fadeOut("slow");},5000 );
+		}
+		//  else if(IsEmail(email)==false){
+		// 	$('#login-formerror').fadeIn().html("Please enter a valid email address.");
+		// 	setTimeout(function() {$('#login-formerror').fadeOut("slow");}, 5000 );
+    //   }
+		else if(password=="")
+		{
+			$('#login-formerror').fadeIn().html("Please enter your password.");
+			setTimeout(function() {$('#login-formerror').fadeOut("slow");}, 5000 );
+		}
+	
+		else{
+			$.ajax({
+        type:"POST",
+        url:'<?php echo Tome::getBaseUrl('buyer/nowsigninnew/');?>',
+				data:{username1:email,password1:password,login:1},
+				cache: false,
+        success: function(results){					
+					var data=JSON.parse(results);				
+			  	    if(data.validation_error=="")
+								{
+									localStorage.setItem('sessionusername', data.sessionusername);
+									$("#loginregister").modal('hide');
+									var appendhtml='<div class="sign-btn"><span class="hellotext"><span class="buyheadtext"><a hreflang="" href="https://pro.tomedes.com/buyer/">Hi '+ data.sessionusername+ ' </a></span>	<span class="logouttext" style="border-left:1px solid #fff; padding-left:6px; cursor:pointer;"><a hreflang="" id="logout">Logout</a></span></span></div>';
+									$(".loginappend").html(appendhtml);
+									$('.loginappend').load();
+									$('#paypal-button-container').load();
+									$(".sign-btn").css({ 'margin-right' : '', 'float' : '' });
+							
+									swal({
+									// className: "red-bg",
+									// title: "You have successfully logged in",
+								
+									// text: "Proceed to checkout",
+									// icon: "success",
+									// confirmButtonClass: "btn-success",
+  								// confirmButtonText: "Continue",
+									icon: "success",
+									title: "You have successfully logged in",
+          text: "Proceed to checkout	",
+          type: "success",
+          showCancelButton: true,
+          confirmButtonClass: 'btn-success',
+          confirmButtonText: 'Success!',
+					button:'Continue',
+
+
+									}).then(
+									function () { 
+									var cardtype=	$('input[name="cardtype"]:checked').val();
+									if(cardtype=="credit_card"){$("#cc_modal").modal();}
+								
+
+									 });			
+
+
+
+							
+					      }
+							  else 
+								{
+								
+									$('#login-formerror').fadeIn().html(data.validation_error);
+									setTimeout(function() {$('#login-formerror').fadeOut("slow");}, 5000 );						
+								}						
+         }
+         });
+		}		
+  });
+
+
+ function IsEmail(email) {
+  var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  if(!regex.test(email)) {
+    return false;
+  }else{
+    return true;
+  }
+}
+
+
+$( "#cc_temp").click(function() {
+		
+		var ccnum=$("#ccnumber_temp").val();
+		var ccname=$("#ccname_temp").val();
+		var ccmonth = $('#ccmonth_temp').val();
+		var ccyear = $('#ccyear_temp').val();
+
+		var cccvv=$("#cccvv_temp").val();
+	
+	 if(ccnum=="")
+		{
+			$('#cc-formerror').fadeIn().html("Please enter your credit card number.");
+			setTimeout(function() {$('#cc-formerror').fadeOut("slow");}, 5000 );
+		}
+		else if(ccnum.length < 13 || ccnum.length > 16)
+		{ 
+			$('#cc-formerror').fadeIn().html("Your credit card number must consist of 13 to 16 digits.");
+			setTimeout(function() {$('#cc-formerror').fadeOut("slow");}, 5000 );
+
+		}
+		
+		else if(ccname=="")
+		{
+			$('#cc-formerror').fadeIn().html("Please enter the credit card holder's name exactly as it appears on the card.");
+			setTimeout(function() {$('#cc-formerror').fadeOut("slow");}, 5000 );
+		}
+
+		else if(ccmonth=="")
+		{
+			$('#cc-formerror').fadeIn().html("Please enter expiration month.");
+			setTimeout(function() {$('#cc-formerror').fadeOut("slow");}, 5000 );
+		}
+		else if(ccyear=="")
+		{
+			$('#cc-formerror').fadeIn().html("Please enter expiration year.");
+			setTimeout(function() {$('#cc-formerror').fadeOut("slow");}, 5000 );
+		}
+
+
+
+		else if(cccvv=="")
+		{
+			$('#cc-formerror').fadeIn().html("Please enter your CVV number.");
+			setTimeout(function() {$('#cc-formerror').fadeOut("slow");}, 5000 );
+		}
+		else if(cccvv.length <3 || cccvv.length >4)
+		{ 
+			$('#cc-formerror').fadeIn().html("Your CVV number must consist of 3 to 4 digits.");
+			setTimeout(function() {$('#cc-formerror').fadeOut("slow");}, 5000 );
+
+		}
+   else
+	  {
+		$("#creditcardnumber").val(ccnum);
+		$("#creditcardholder").val(ccname);
+		$('#month').val(ccmonth);
+	  $('#selectElementId').val(ccyear);
+    $("#cvv").val(cccvv);
+		$("#cc_modal").modal('hide');
+		$('#Submit2').click();			
+		}
+  });	
+
+
+
+	$( "#register_temp").click(function() {
+		$("#email_temp1,#pwd_temp1").val("");
+		var email=$("#email_temp2").val();
+		var password=$("#pwd_temp2").val();
+		var username=$("#uname_temp2").val();
+
+	 if(username=="")
+		{
+			$('#registration-formerror').fadeIn().html("Please enter your username.");
+			setTimeout(function() {$('#registration-formerror').fadeOut("slow");}, 5000 );
+		}
+	
+		else if(email=="")
+		{
+			$('#registration-formerror').fadeIn().html("Please enter your email address.");
+			setTimeout(function() {$('#registration-formerror').fadeOut("slow");}, 5000 );
+		}
+		else if(IsEmail(email)==false){
+			$('#registration-formerror').fadeIn().html("Please enter a valid email address.");
+			setTimeout(function() {$('#registration-formerror').fadeOut("slow");}, 5000 );
+         
+      }
+		else if(password=="")
+		{
+			$('#registration-formerror').fadeIn().html("Please enter your password.");
+			setTimeout(function() {$('#registration-formerror').fadeOut("slow");}, 5000 );
+		}
+		
+		else{
+			$.ajax({
+        type: "POST",
+				cache: false,
+        url: '<?php echo Tome::getBaseUrl('buyer/nowsigninnew/');?>',
+        data:{txtEmail:email,password:password,insert:1,firstname:username},
+        success: function(results){					
+					var data=JSON.parse(results);			
+			  	   if(data.validation_error=="")
+								{
+								
+									localStorage.setItem('sessionusername', data.sessionusername);
+									$("#loginregister").modal('hide');
+									var appendhtml='<div class="sign-btn"><span class="hellotext"><span class="buyheadtext"><a hreflang="" href="https://pro.tomedes.com/buyer/">Hi '+ data.sessionusername+ ' </a></span>	<span class="logouttext" style="border-left:1px solid #fff; padding-left:6px;"><a hreflang="" id="logout">Logout</a></span></span></div>';
+									$(".loginappend").html(appendhtml);
+									$('.loginappend').load();
+									$(".sign-btn").css({ 'margin-right' : '', 'float' : '' });		
+							
+									swal({
+										icon: "success",
+									title: "You have successfully created your account.  Welcome to Tomedes!",
+          text: "Proceed to checkout.	",
+          type: "success",
+          showCancelButton: true,
+          confirmButtonClass: 'btn-success',
+          confirmButtonText: 'Success!',
+					button:'Continue',
+
+
+									}).then(
+									function () { 
+								
+										var cardtype=	$('input[name="cardtype"]:checked').val();
+									if(cardtype=="credit_card"){$("#cc_modal").modal();}
+								
+
+									 });			
+
+
+
+
+								}
+
+							else 
+								 {
+if(data.validation_status==1){
+		$("#myAlert3").append("<div class='alert alert-warning alert-dismissable alert-style' id='myAlert4'><button type='button' class='close' data-dismiss='alert'  aria-hidden='true'>&times;</button><i class='fa fa-times-circle' style='color:#ea5d47; font-size:30px; position: absolute; left:20px;' aria-hidden='true'></i>  Sorry the email " + data.email + " is already in use.</div>");
+    $("#myAlert3").css("display", "");
+    $("#myAlert3").delay(10000).slideUp(200, function() {
+    $(this).alert('close');
+    });
+}
+				else{
+					$('#registration-formerror').fadeIn().html(data.validation_error);
+													setTimeout(function() {$('#registration-formerror').fadeOut("slow");}, 5000 );	
+				}
+									
+															
+								}
+							
+				}
+         });
+		}
+  });	
+
+
+	$(".paypal-paybutton-old").hide();
+	$(".paypal-paybutton-new").hide();
+    
+	var min = new Date().getFullYear(),		
+    max = min + 30,		
+    select = document.getElementById('selectElementId');		
+	for (var i = min; i<=max; i++){		
+		var opt = document.createElement('option');		
+		opt.value = i;		
+		opt.innerHTML = i;		
+		select.appendChild(opt);		
+	}
+	
+	var test;
+    $("input[name$='cardtype']").click(function() {		
+         test = $(this).val();		
+				
+		if(test=="credit_card")		
+		{			
+			$(".credit-card").show();
+			$(".paypal-paybutton-old").hide();
+			$(".creditcard-paybutton").show();
+			$(".paypal-paybutton-new").hide();		
+		}			
+		else		
+		{	
+			$(".paypal-paybutton-old").hide();			
+			$(".paypal-paybutton-new").show();		
+			$(".credit-card").hide();
+			$(".creditcard-paybutton").hide();
+			// $("#input_param").submit();		
+		}				
+    });	
+
+
+
+
+
+<?php if($_SESSION['language']=='English'){ ?>
+		$("input[name$='Submit2']").click(function() {		
+
+			if(test=="pay_pal")		
+			{		
+				gtag('event', 'Click', { 'event_category' : 'HomepagetoQuote', 'event_label' : 'Step4_PayNow_PP' });			
+			}			
+			else		
+			{			
+
+				gtag('event', 'Click', { 'event_category' : 'HomepagetoQuote', 'event_label' : 'Step4_PayNow_CC' });
+			}				
+		});	
+<?php } ?>
+	
+});		
+</script>	
