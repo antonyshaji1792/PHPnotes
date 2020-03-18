@@ -3,7 +3,7 @@ Construtor
 Destrutor
 Access Modifiers - Public, Private, Protected
 Interface
-
+Abstract Classes
 
 Inheritance - include the class file name and use extends to use the included file methods
 
@@ -68,4 +68,26 @@ To use it
 2. Then Class A implements interfacename{} 
 3. we can implement more than one interface for a class
    Then Class A implements interfacename,interfacename2{} 
+================================================================
+Abstract Classes
+
+abstract Class A{
+  
+}
+
+We cannot create object from a abstract class.
+It can only be extends to different class. And abstract methods can be used directly
+
+
+abstract Class A{
+  abstract public function newfunc();
+}
+
+Any class that extends the abstract class must have the above abstract function (rule like interface)
+
+==============================================================
+
+
+
+
 
